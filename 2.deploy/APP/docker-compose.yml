@@ -25,6 +25,7 @@ services:
   web:
     image: nginx:latest
     container_name: nginx
+    restart: always
     volumes:
       - ${PWD}/nginx:/etc/nginx/conf.d
     ports:

@@ -1,7 +1,7 @@
 ---
 ### You require python-boto package on ansible host to run this yml file
 ### You require to export aws credentials as environment varibale to run this yml file
-
+### You require to define appropriate s3 bucket name from where it will fetch require code for deployment
 
 - hosts:  localhost
   connection: local

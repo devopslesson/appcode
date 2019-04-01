@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  python-http:
+    image: trinitronx/python-simplehttpserver
+    restart: always
+    container_name: python-httpserver
+    ports:
+      - "127.0.0.1:3000:8080"
+    volumes:
+      - ${PWD}/python-http:/var/www:ro
+    links:
+      - db:DB
+  
+  db:
+    image: mariadb:latest
+    container_name: DB
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: hello
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: changeme
+    restart: always
+
+  web:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_HOST=example.com
+      - NGINX_port=80
+    links:
+      - python-http:python-httpserver

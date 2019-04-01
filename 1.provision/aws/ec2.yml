@@ -1,0 +1,33 @@
+---
+### You require python-boto package on ansible host to run this yml file
+### You require to export aws credentials as environment varibale to run this yml file
+
+
+- hosts:  localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name :  create EC2 INSTANCES
+      ec2:
+        region: ap-southeast-2
+        count:  1
+        key_name: 'tj_Devops'
+        group:  'tj_sg'
+        image: 'ami-b6bb47d4' # CENTOS 7 - SYDNEY
+        type: 't2.micro'
+        instance_profile_name: 'Ec2-S3'
+        user_data: |
+                    #!/bin/sh
+                     yum install docker awscli git -y
+                     curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+                     chmod +x /usr/local/bin/docker-compose
+                     setsebool httpd_can_network_connect 1 -P
+                     aws s3 sync s3://dopsbucket86 /opt                     
+                     systemctl start docker
+                     systemctl enable docker
+                     cd /opt/APP
+                     docker-compose up -d
+                     cat /opt/data.sql | docker exec -i DB /usr/bin/mysql -u root --password=changeme hello
+        wait: true
+      register: ec2

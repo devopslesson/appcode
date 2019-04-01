@@ -3,6 +3,7 @@
  2.deploy - this folder has docker-compose.yml which deployes complete stacks which covers mariadb,nginx,python-httpserver
 
  user requires to have AWS account to  run this code by setting up commandlie access.
+ user need to define consul / docker secret functanility to use passwd and user varibale in code instead to define in plain text.
 
 # 1.provison/ec2.yml
 

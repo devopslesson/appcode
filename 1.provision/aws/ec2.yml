@@ -2,6 +2,7 @@
 ### You require python-boto package on ansible host to run this yml file
 ### You require to export aws credentials as environment varibale to run this yml file
 ### You require to define appropriate s3 bucket name from where it will fetch require code for deployment
+### changeme comes from consul / docker secret function which is encrypted and not highlighed on screen or in code
 
 - hosts:  localhost
   connection: local
@@ -14,7 +15,7 @@
         count:  1
         key_name: 'tj_Devops'
         group:  'tj_sg'
-        image: 'ami-b6bb47d4' # CENTOS 7 - SYDNEY
+        image: 'ami-b6bb47d4' 
         type: 't2.micro'
         instance_profile_name: 'Ec2-S3'
         user_data: |

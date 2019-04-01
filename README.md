@@ -1,5 +1,5 @@
 # Example on AWS + DOCKER-COMPOSE with ansible 
- 1.provision - this foldr provides ec2 playbook which deployes centos7 in cloud
+ 1.provision - this folder provides ec2 playbook which deployes centos7 in cloud
  2.deploy - this folder has docker-compose.yml which deployes complete stacks which covers mariadb,nginx,python-httpserver
 
  user requireisto have AWS account to  run this code by setting up commandlie access.
